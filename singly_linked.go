@@ -15,12 +15,21 @@ func NewSinglyLinked[T any](s []T) *NodeSL[T] {
 	return head
 }
 
-// Append adds a node at the tail of the singly-linked list.
+// Append creates a new node with the provided value and appends it at the tail of the singly-linked list.
 func (n *NodeSL[T]) Append(val T) *NodeSL[T] {
 	if n == nil {
 		return &NodeSL[T]{Value: val}
 	}
 	n.Next = n.Next.Append(val)
+	return n
+}
+
+// AppendNode appends the provided node at the tail of the singly-linked list.
+func (n *NodeSL[T]) AppendNode(tn *NodeSL[T]) *NodeSL[T] {
+	if n == nil {
+		return tn
+	}
+	n.Next = n.Next.AppendNode(tn)
 	return n
 }
 
